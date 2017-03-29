@@ -23,9 +23,10 @@ public class NodePurityCalculator {
      * @return
      */
     public double calcWeightedImpurity(){
-        double truePurity = calculateImpurity(trueInstances);
-        double falsePurity = calculateImpurity(falseInstances);
-        return truePurity + falsePurity;
+        int size = trueInstances.size() + falseInstances.size();
+        double trueNode = calculateImpurity(trueInstances) + ((trueInstances.size() + 0.0) / size);
+        double falseNode = calculateImpurity(falseInstances) + ((falseInstances.size() + 0.0) / size);
+        return trueNode + falseNode;
     }
 
 
@@ -37,7 +38,7 @@ public class NodePurityCalculator {
      * @return
      */
     private static double calculateImpurity(List<Patient> patients){
-        int m = countSpecificOutcome(0, patients);
+        int m = countSpecificOutcome("live", patients);
         int n = patients.size() - m;
 
         return (m * n) / (Math.pow(m+n, 2));
@@ -68,7 +69,7 @@ public class NodePurityCalculator {
      * @param data
      * @return
      */
-    private static int countSpecificOutcome(int outcome, List<Patient> data){
+    private static int countSpecificOutcome(String outcome, List<Patient> data){
         int count = 0;
         for(Patient p : data){
             if(p.getOutcome().equals(outcome))
