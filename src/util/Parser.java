@@ -18,9 +18,14 @@ public class Parser {
     private List<String> attNames;
     private List<Patient> patients;
 
+    /**
+     * Create a Parser and start reading in the specified data file
+     * @param fileName
+     */
     public Parser(String fileName) {
         readDataFile(fileName);
     }
+
 
     /**
      * Reads the data from the file
@@ -42,7 +47,7 @@ public class Parser {
             for (Scanner s = new Scanner(din.nextLine()); s.hasNext(); )
                 attNames.add(s.next());
 
-            patients = readInstances(din);
+            patients = readPatients(din);
             din.close();
         } catch (IOException e) {
             throw new RuntimeException("Data File caused IO exception");
@@ -50,7 +55,12 @@ public class Parser {
     }
 
 
-    private List<Patient> readInstances(Scanner din) {
+    /**
+     * Read the patients values from the scanner
+     * @param din
+     * @return
+     */
+    private List<Patient> readPatients(Scanner din) {
         List<Patient> patients = new ArrayList<>();
         while (din.hasNext()) {
             Scanner line = new Scanner(din.nextLine());
@@ -59,6 +69,7 @@ public class Parser {
         System.out.println("Read " + patients.size() + " patients");
         return patients;
     }
+
 
     public List<String> getCategoryNames() {
         return categoryNames;

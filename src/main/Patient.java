@@ -4,30 +4,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The patient represents an instance of data and contains a list of attributes and an outcome of that patient
+ */
 public class Patient {
 
-    private int category; // Live = 0, Die = 1
-    private List<Boolean> values; // Values for the attributes
+    private int outcome; // Live = 0, Die = 1
+    private List<Boolean> attributes; // Values for the attributes
+
 
     public Patient(int cat, Scanner s) {
-        category = cat;
-        values = new ArrayList<>();
+        outcome = cat;
+        attributes = new ArrayList<>();
         while (s.hasNextBoolean())
-            values.add(s.nextBoolean());
+            attributes.add(s.nextBoolean());
     }
 
+    /**
+     * Get a specific attribute at the index specified.
+     * @param index
+     * @return
+     */
     public boolean getAttribute(int index) {
-        return values.get(index);
+        return attributes.get(index);
     }
 
-    public int getCategory() {
-        return category;
+    /**
+     * Get the outcome (result) of the patient
+     * @return
+     */
+    public int getOutcome() {
+        return outcome;
     }
 
+    @Override
     public String toString() {
-        StringBuilder ans = new StringBuilder("Category: " + category);
+        StringBuilder ans = new StringBuilder("Category: " + outcome);
         ans.append(" ");
-        for (Boolean val : values)
+        for (Boolean val : attributes)
             ans.append(val ? "true  " : "false ");
         return ans.toString();
     }

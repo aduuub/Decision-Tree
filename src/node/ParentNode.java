@@ -1,5 +1,7 @@
 package node;
 
+import java.util.List;
+
 /**
  * Created by Adam on 24/03/17.
  */
@@ -14,15 +16,17 @@ public class ParentNode implements Node{
         this.attribute = attribute;
     }
 
-    public Node getTrueNode() {
-        return trueNode;
-    }
+    @Override
+    public void report(String indent, List<String> attNames){
+        if(attribute < 0 || attribute >= attNames.size()){
 
-    public Node getFalseNode() {
-        return falseNode;
-    }
+            System.out.println("err");
+        }
 
-    public int getAttribute(){
-        return attribute;
+        System.out.format("%s%s = True:\n", indent, attNames.get(attribute));
+        trueNode.report(indent+" ", attNames);
+
+        System.out.format("%s%s = False:\n", indent, attNames.get(attribute));
+        falseNode.report(indent+" ", attNames);
     }
 }

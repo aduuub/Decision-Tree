@@ -4,6 +4,7 @@ import node.Node;
 import util.Parser;
 import util.TreeBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,14 +25,14 @@ public class Main {
 
     public Main(String trainingFileName, String testingFileName){
         // Parse in the data and build the tree using the training data
-        initTree(trainingFileName, testingFileName);
+        headNode = initTree(trainingFileName, testingFileName);
 
         // Run the tests
-
+        headNode.report("", attributeNames);
     }
 
 
-    private void initTree(String trainingFileName, String testingFileName){
+    private Node initTree(String trainingFileName, String testingFileName){
         // Load training data
         Parser parser = new Parser(trainingFileName);
         trainingData = parser.getPatients();
@@ -42,13 +43,21 @@ public class Main {
         attributeNames = parser.getAttNames();
         categoryNames = parser.getCategoryNames();
 
+        List<String> attributeNamesClone = new ArrayList<>();
+        attributeNamesClone.addAll(attributeNames);
+
         // Build the tree
-        TreeBuilder treeBuilder = new TreeBuilder(trainingData, attributeNames);
-        headNode = treeBuilder.getRootNode();
+        TreeBuilder treeBuilder = new TreeBuilder(trainingData, attributeNamesClone);
+        return treeBuilder.getRootNode();
     }
 
 
     public static void main(String args[]){
-        new Main(args[0], args[1]);
+        if(args.length != 2){
+            System.out.println("Invalid program arguments. \n Arguments: \"TrainingFileName\" \"TestingFileName\"");
+
+        }else{
+            new Main(args[0], args[1]);
+        }
     }
 }

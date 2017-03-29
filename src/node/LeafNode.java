@@ -1,9 +1,11 @@
 package node;
 
+import java.util.List;
+
 /**
  * Created by Adam on 25/03/17.
  */
-public class LeafNode implements Node{
+public class LeafNode implements Node {
 
     private int attribute;
     private double probability;
@@ -13,11 +15,8 @@ public class LeafNode implements Node{
         this.probability = probability;
     }
 
-    public int getAttribute() {
-        return attribute;
-    }
-
-    public double getProbability() {
-        return probability;
+    @Override
+    public void report(String indent, List<String> attNames) {
+        System.out.format("%sClass %s, prob=%f\n", indent, attNames.get(attribute), probability);
     }
 }
