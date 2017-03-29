@@ -1,5 +1,7 @@
 package node;
 
+import main.Patient;
+
 import java.util.List;
 
 /**
@@ -7,16 +9,22 @@ import java.util.List;
  */
 public class LeafNode implements Node {
 
-    private int attribute;
+    private String outcome;
     private double probability;
 
-    public LeafNode(int attribute, double probability) {
-        this.attribute = attribute;
+    public LeafNode(String attribute, double probability) {
+        this.outcome = attribute;
         this.probability = probability;
     }
 
     @Override
-    public void report(String indent, List<String> attNames) {
-        System.out.format("%sClass %s, prob=%f\n", indent, attNames.get(attribute), probability);
+    public void report(String indent) {
+        System.out.format("%sCategory %s, prob=%f\n", indent, outcome, probability);
+    }
+
+    @Override
+    public String traverse(Patient patient, List<String> attributeNames) {
+        return outcome;
+
     }
 }

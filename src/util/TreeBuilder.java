@@ -12,7 +12,9 @@ import java.util.*;
  */
 public class TreeBuilder {
 
-    private int baselineAttribute;
+    public static final String INDENT_SPACING = "  ";
+
+    private String baselineOutcome;
     private double baseLineProbability;
 
     private Node rootNode;
@@ -26,8 +28,8 @@ public class TreeBuilder {
     public TreeBuilder(List<Patient> trainingData, List<String> attributeNames){
 
         // Calculate baseline class and probability
-        baselineAttribute = mostProbableAttribute(trainingData);
-        baseLineProbability = attributeProbability(trainingData, baselineAttribute);
+        baselineOutcome = mostProbableAttribute(trainingData);
+        baseLineProbability = attributeProbability(trainingData, baselineOutcome);
 
         rootNode = buildTree(trainingData, attributeNames);
     }
@@ -43,7 +45,7 @@ public class TreeBuilder {
 
         if(patients.isEmpty()){
             // If patients are empty return a leaf node with the overall most probable attribute
-            return new LeafNode(baselineAttribute, baseLineProbability);
+            return new LeafNode(baselineOutcome, baseLineProbability);
 
         }if(NodePurityCalculator.areInstancesPure(patients)){
             // If patients are pure return a leaf node with probability of one
@@ -52,9 +54,9 @@ public class TreeBuilder {
 
         }if(attributes.isEmpty()){
             // If if attributes are empty return new leaf node containing the name and probability of the majority class
-            int mostProbableAttribute = mostProbableAttribute(patients);
-            double probability = attributeProbability(patients, mostProbableAttribute);
-            return new LeafNode(mostProbableAttribute, probability);
+            String mostProbableOutcome = mostProbableAttribute(patients);
+            double probability = attributeProbability(patients, mostProbableOutcome);
+            return new LeafNode(mostProbableOutcome, probability);
 
 
         }else{
@@ -98,13 +100,15 @@ public class TreeBuilder {
             }
         }
 
+        String bestAttributeName = attributes.get(bestAttribute);
+
         // Remove used attribute
         attributes.remove(bestAttribute);
 
         // Build subtree using the remaining attributes
         Node left = buildTree(bestTruePatients, attributes);
         Node right = buildTree(bestFalsePatients, attributes);
-        return new ParentNode(bestAttribute, left, right);
+        return new ParentNode(bestAttributeName, left, right);
     }
 
 
@@ -115,16 +119,16 @@ public class TreeBuilder {
      * @param patients
      * @return
      */
-    private static int mostProbableAttribute(List<Patient> patients){
-        Map<Integer, Integer> attributeToVotes = new HashMap<>(); // Attribute -> Vote count
+    private static String mostProbableAttribute(List<Patient> patients){
+        Map<String, Integer> attributeToVotes = new HashMap<>(); // Attribute -> Vote count
 
         for(Patient patient : patients){
-            int attribute = patient.getOutcome();
-            if(attributeToVotes.containsKey(attribute)){
-                int count = attributeToVotes.get(attribute);
-                attributeToVotes.put(attribute, count+1);
+            String outcome = patient.getOutcome();
+            if(attributeToVotes.containsKey(outcome)){
+                int count = attributeToVotes.get(outcome);
+                attributeToVotes.put(outcome, count+1);
             }else{
-                attributeToVotes.put(attribute, 1);
+                attributeToVotes.put(outcome, 1);
             }
         }
 
@@ -133,18 +137,18 @@ public class TreeBuilder {
 
 
     /**
-     * Calculates the probability of an attribute
+     * Calculates the probability of an outcome
      * @param patients
-     * @param attribute
+     * @param outcome
      * @return
      */
-    private double attributeProbability(List<Patient> patients, int attribute){
+    private double attributeProbability(List<Patient> patients, String outcome){
         if(patients.size() == 0)
             return 0;
 
         int count = 0;
         for(Patient patient : patients){
-            if(patient.getOutcome() == attribute)
+            if(patient.getOutcome().equals(outcome))
                 count++;
         }
 
@@ -158,5 +162,12 @@ public class TreeBuilder {
         return rootNode;
     }
 
+    public String getBaselineOutcome() {
+        return baselineOutcome;
+    }
+
+    public double getBaseLineProbability() {
+        return baseLineProbability;
+    }
 }
 

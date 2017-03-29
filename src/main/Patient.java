@@ -9,12 +9,12 @@ import java.util.Scanner;
  */
 public class Patient {
 
-    private int outcome; // Live = 0, Die = 1
+    private String outcome; // Live = 0, Die = 1
     private List<Boolean> attributes; // Values for the attributes
 
 
-    public Patient(int cat, Scanner s) {
-        outcome = cat;
+    public Patient(String outcome, Scanner s) {
+        this.outcome = outcome;
         attributes = new ArrayList<>();
         while (s.hasNextBoolean())
             attributes.add(s.nextBoolean());
@@ -33,7 +33,7 @@ public class Patient {
      * Get the outcome (result) of the patient
      * @return
      */
-    public int getOutcome() {
+    public String getOutcome() {
         return outcome;
     }
 

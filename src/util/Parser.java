@@ -64,7 +64,7 @@ public class Parser {
         List<Patient> patients = new ArrayList<>();
         while (din.hasNext()) {
             Scanner line = new Scanner(din.nextLine());
-            patients.add(new Patient(categoryNames.indexOf(line.next()), line));
+            patients.add(new Patient(line.next(), line));
         }
         System.out.println("Read " + patients.size() + " patients");
         return patients;

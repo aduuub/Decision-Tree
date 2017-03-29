@@ -53,9 +53,9 @@ public class NodePurityCalculator {
         if (patients.isEmpty())
             return true;
 
-        int category = patients.get(0).getOutcome();
+        String outcome = patients.get(0).getOutcome();
         for (Patient patient : patients) {
-            if(patient.getOutcome() != category)
+            if(!patient.getOutcome().equals(outcome))
                 return false;
         }
         return true;
@@ -71,7 +71,7 @@ public class NodePurityCalculator {
     private static int countSpecificOutcome(int outcome, List<Patient> data){
         int count = 0;
         for(Patient p : data){
-            if(p.getOutcome() == outcome)
+            if(p.getOutcome().equals(outcome))
                 count++;
         }
         return count;

@@ -20,6 +20,8 @@ public class Main {
     private List<String> attributeNames;
     private List<String> categoryNames; // Live = 0, Die = 1
 
+    // Tree
+    private TreeBuilder treeBuilder;
     private Node headNode;
 
 
@@ -27,8 +29,8 @@ public class Main {
         // Parse in the data and build the tree using the training data
         headNode = initTree(trainingFileName, testingFileName);
 
-        // Run the tests
-        headNode.report("", attributeNames);
+        //
+        runTests();
     }
 
 
@@ -47,8 +49,31 @@ public class Main {
         attributeNamesClone.addAll(attributeNames);
 
         // Build the tree
-        TreeBuilder treeBuilder = new TreeBuilder(trainingData, attributeNamesClone);
+        treeBuilder = new TreeBuilder(trainingData, attributeNamesClone);
         return treeBuilder.getRootNode();
+    }
+
+
+    private void runTests(){
+        // Print accuracy
+        System.out.println("\nBaseline probability: " + treeBuilder.getBaseLineProbability());
+        System.out.println("Baseline attribute: " + treeBuilder.getBaselineOutcome());
+        System.out.println("Tree: \n");
+
+        // Print the tree
+        headNode.report("");
+
+        // Run the tests
+        int correctlyGuessed = 0;
+        for(Patient p : testingData) {
+            String outcome = headNode.traverse(testingData.get(0), attributeNames);
+            if(outcome.equals(p.getOutcome())){
+                correctlyGuessed++;
+            }
+        }
+
+        double percentage = (correctlyGuessed + 0.0) / testingData.size();
+        System.out.println("\nPercentage correct: " + percentage);
     }
 
 
