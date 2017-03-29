@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="527763e6-d7a1-4d1b-89e3-8bcaa113b957" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Part 2/main/Main.class" afterPath="$PROJECT_DIR$/out/production/Part 2/main/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Part 2/main/Patient.class" afterPath="$PROJECT_DIR$/out/production/Part 2/main/Patient.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Part 2/node/LeafNode.class" afterPath="$PROJECT_DIR$/out/production/Part 2/node/LeafNode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Part 2/node/Node.class" afterPath="$PROJECT_DIR$/out/production/Part 2/node/Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Part 2/node/ParentNode.class" afterPath="$PROJECT_DIR$/out/production/Part 2/node/ParentNode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Part 2/util/NodePurityCalculator.class" afterPath="$PROJECT_DIR$/out/production/Part 2/util/NodePurityCalculator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Part 2/util/Parser.class" afterPath="$PROJECT_DIR$/out/production/Part 2/util/Parser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Part 2/util/SubListBuilder.class" afterPath="$PROJECT_DIR$/out/production/Part 2/util/SubListBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Part 2/util/TreeBuilder.class" afterPath="$PROJECT_DIR$/out/production/Part 2/util/TreeBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Main.java" afterPath="$PROJECT_DIR$/src/main/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Patient.java" afterPath="$PROJECT_DIR$/src/main/Patient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/node/LeafNode.java" afterPath="$PROJECT_DIR$/src/node/LeafNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/node/Node.java" afterPath="$PROJECT_DIR$/src/node/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/node/ParentNode.java" afterPath="$PROJECT_DIR$/src/node/ParentNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/NodePurityCalculator.java" afterPath="$PROJECT_DIR$/src/util/NodePurityCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/Parser.java" afterPath="$PROJECT_DIR$/src/util/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/TreeBuilder.java" afterPath="$PROJECT_DIR$/src/util/TreeBuilder.java" />
     </list>
     <ignored path="Part 2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,8 +27,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
-              <caret line="75" column="30" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
+            <state relative-caret-position="705">
+              <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -220,7 +203,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;hepatitis-training.dat&quot; &quot;hepatitis-test.dat&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;hepatitis.dat&quot; &quot;hepatitis-test.dat&quot;" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -502,7 +485,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46581435" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46581435" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -999,8 +982,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="75" column="30" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
+        <state relative-caret-position="705">
+          <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

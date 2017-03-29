@@ -65,15 +65,28 @@ public class Main {
 
         // Run the tests
         int correctlyGuessed = 0;
+        int predictedToDie = 0;
+        int actuallyDied = 0;
         for(Patient p : testingData) {
             String outcome = headNode.traverse(testingData.get(0), attributeNames);
             if(outcome.equals(p.getOutcome())){
                 correctlyGuessed++;
             }
+
+            // Prediction
+            if(p.getOutcome().equals("die")) {
+                actuallyDied++;
+            }if(outcome.equals("die")){
+                predictedToDie++;
+            }
+
         }
 
         double percentage = (correctlyGuessed + 0.0) / testingData.size();
-        System.out.println("\nPercentage correct: " + percentage);
+        System.out.println("\nPatients predicted to die: " + predictedToDie + ". Actually died: " + actuallyDied);
+        System.out.println("Patients predicted to live: " + (testingData.size() - predictedToDie) + ". Actually lived: " +
+                (testingData.size() - actuallyDied));
+        System.out.println("Percentage correct: " + percentage);
     }
 
 
