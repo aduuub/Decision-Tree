@@ -34,6 +34,12 @@ public class Main {
     }
 
 
+    /**
+     * Constructs the tree and sets the fields
+     * @param trainingFileName
+     * @param testingFileName
+     * @return
+     */
     private Node initTree(String trainingFileName, String testingFileName){
         // Load training data
         Parser parser = new Parser(trainingFileName);
@@ -54,6 +60,9 @@ public class Main {
     }
 
 
+    /**
+     * Runs the tests on the test data
+     */
     private void runTests(){
         // Print accuracy
         System.out.println("\nBaseline probability: " + treeBuilder.getBaseLineProbability());
@@ -90,6 +99,10 @@ public class Main {
     }
 
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]){
         if(args.length != 2){
             System.out.println("Invalid program arguments. \n Arguments: \"TrainingFileName\" \"TestingFileName\"");

@@ -24,8 +24,17 @@ public class NodePurityCalculator {
      */
     public double calcWeightedImpurity(){
         int size = trueInstances.size() + falseInstances.size();
-        double trueNode = calculateImpurity(trueInstances) + ((trueInstances.size() + 0.0) / size);
-        double falseNode = calculateImpurity(falseInstances) + ((falseInstances.size() + 0.0) / size);
+        // Calculate impurity
+        double trueNode = calculateImpurity(trueInstances);
+        double falseNode = calculateImpurity(falseInstances);
+
+        // Calculate probability
+        double falseProb = (falseInstances.size() + 0.0) / size;
+        double trueProb = (trueInstances.size() + 0.0) / size;
+
+        // Combine
+        falseNode *= falseProb;
+        trueNode *= trueProb;
         return trueNode + falseNode;
     }
 
@@ -38,10 +47,10 @@ public class NodePurityCalculator {
      * @return
      */
     private static double calculateImpurity(List<Patient> patients){
-        int m = countSpecificOutcome("live", patients);
-        int n = patients.size() - m;
+        int live = countSpecificOutcome("live", patients);
+        int die = patients.size() - live;
 
-        return (m * n) / (Math.pow(m+n, 2));
+        return (live * die) / (Math.pow(live+die, 2));
     }
 
 

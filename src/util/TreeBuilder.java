@@ -6,6 +6,7 @@ import node.Node;
 import node.ParentNode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Adam on 24/03/17.
@@ -16,6 +17,8 @@ public class TreeBuilder {
 
     private String baselineOutcome;
     private double baseLineProbability;
+
+    private List<String> attributeNames;
 
     private Node rootNode;
 
@@ -31,7 +34,11 @@ public class TreeBuilder {
         baselineOutcome = mostProbableAttribute(trainingData);
         baseLineProbability = attributeProbability(trainingData, baselineOutcome);
 
-        rootNode = buildTree(trainingData, attributeNames);
+        this.attributeNames = attributeNames;
+        List<Patient> data = new ArrayList<>(trainingData);
+
+        List<Integer> attributesInt = attributeNames.stream().map(a -> attributeNames.indexOf(a)).collect(Collectors.toList());
+        rootNode = buildTree(data, attributesInt);
     }
 
 
@@ -41,23 +48,20 @@ public class TreeBuilder {
      * @param attributes
      * @return - the head of the tree
      */
-    private Node buildTree(List<Patient> patients, List<String> attributes){
-
+    private Node buildTree(List<Patient> patients, List<Integer> attributes){
         if(patients.isEmpty()){
             // If patients are empty return a leaf node with the overall most probable attribute
             return new LeafNode(baselineOutcome, baseLineProbability);
 
-        }if(NodePurityCalculator.areInstancesPure(patients)){
+        }else if(NodePurityCalculator.areInstancesPure(patients)){
             // If patients are pure return a leaf node with probability of one
             return new LeafNode(patients.get(0).getOutcome(), 1);
 
-
-        }if(attributes.isEmpty()){
+        }else if(attributes.isEmpty()){
             // If if attributes are empty return new leaf node containing the name and probability of the majority class
             String mostProbableOutcome = mostProbableAttribute(patients);
             double probability = attributeProbability(patients, mostProbableOutcome);
             return new LeafNode(mostProbableOutcome, probability);
-
 
         }else{
             // Else find the best attribute
@@ -72,14 +76,16 @@ public class TreeBuilder {
      * @param attributes
      * @return
      */
-    private Node findBestAttribute(List<Patient> patients, List<String> attributes){
-        int bestAttribute = 0;
-        double bestPurity = Double.POSITIVE_INFINITY;
-        List<Patient> bestTruePatients = new ArrayList<>();
-        List<Patient> bestFalsePatients = new ArrayList<>();
+    private Node findBestAttribute(List<Patient> patients, List<Integer> attributes){
+        // Init
+        int bestAttribute = -1;
+        double lowestImpurity = Double.POSITIVE_INFINITY;
+        List<Patient> bestTruePatients = null;
+        List<Patient> bestFalsePatients = null;
 
         // For each attribute
-        for(int attributeIndex = 0; attributeIndex < attributes.size(); attributeIndex++){
+        for(int i = 0; i < attributes.size(); i++){
+            int attributeIndex = attributes.get(i);
 
             // Separate into two sets
             SubListBuilder subListBuilder = new SubListBuilder(patients, attributeIndex);
@@ -91,19 +97,19 @@ public class TreeBuilder {
             double impurity = purityCalculator.calcWeightedImpurity();
 
             // If purity of this set is the best so far
-            if(impurity < bestPurity){
+            if(impurity < lowestImpurity){
                 // Update best attributes
                 bestAttribute = attributeIndex;
-                bestPurity = impurity;
+                lowestImpurity = impurity;
                 bestTruePatients = trueAttributes;
                 bestFalsePatients = falseAttributes;
             }
         }
 
-        String bestAttributeName = attributes.get(bestAttribute);
-
         // Remove used attribute
-        attributes.remove(bestAttribute);
+        String bestAttributeName = attributeNames.get(bestAttribute);
+        int index = attributes.indexOf(bestAttribute);
+        attributes.remove(index);
 
         // Build subtree using the remaining attributes
         Node left = buildTree(bestTruePatients, attributes);
@@ -154,9 +160,6 @@ public class TreeBuilder {
 
         return (count + 0.0) / patients.size();
     }
-
-
-
 
     public Node getRootNode(){
         return rootNode;
