@@ -19,7 +19,8 @@ public class LeafNode implements Node {
 
     @Override
     public void report(String indent) {
-        System.out.format("%sCategory %s, prob=%f\n", indent, outcome, probability);
+        //System.out.format("%sCategory %s, prob=%f \n", indent, outcome, probability*100);
+        System.out.println(indent + "Category " + outcome + ", prob = " + Math.round(probability*100) + "%");
     }
 
     @Override

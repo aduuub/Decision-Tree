@@ -72,12 +72,12 @@ public class Main {
         // Print the tree
         headNode.report("");
 
-        // Run the tests
+        // Run the tests d
         int correctlyGuessed = 0;
         int predictedToDie = 0;
         int actuallyDied = 0;
         for(Patient p : testingData) {
-            String outcome = headNode.traverse(testingData.get(0), attributeNames);
+            String outcome = headNode.traverse(p, attributeNames);
             if(outcome.equals(p.getOutcome())){
                 correctlyGuessed++;
             }
@@ -91,7 +91,7 @@ public class Main {
 
         }
 
-        double percentage = (correctlyGuessed + 0.0) / testingData.size();
+        double percentage = ((double)correctlyGuessed) / ((double)testingData.size());
         System.out.println("\nPatients predicted to die: " + predictedToDie + ". Actually died: " + actuallyDied);
         System.out.println("Patients predicted to live: " + (testingData.size() - predictedToDie) + ". Actually lived: " +
                 (testingData.size() - actuallyDied));

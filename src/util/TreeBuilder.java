@@ -30,6 +30,15 @@ public class TreeBuilder {
      */
     public TreeBuilder(List<Patient> trainingData, List<String> attributeNames){
 
+//        int count = 0;
+//        int femaleIndex = attributeNames.indexOf("FEMALE");
+//        for(Patient p : trainingData){
+//            if(p.getOutcome().equals("live")){
+//                count++;
+//            }
+//        }
+//        System.out.println(count + " Live");
+
         // Calculate baseline class and probability
         baselineOutcome = mostProbableAttribute(trainingData);
         baseLineProbability = attributeProbability(trainingData, baselineOutcome);
@@ -39,6 +48,8 @@ public class TreeBuilder {
 
         List<Integer> attributesInt = attributeNames.stream().map(a -> attributeNames.indexOf(a)).collect(Collectors.toList());
         rootNode = buildTree(data, attributesInt);
+
+
     }
 
 
@@ -112,8 +123,12 @@ public class TreeBuilder {
         attributes.remove(index);
 
         // Build subtree using the remaining attributes
-        Node left = buildTree(bestTruePatients, attributes);
         Node right = buildTree(bestFalsePatients, attributes);
+        Node left = buildTree(bestTruePatients, attributes);
+
+        // Add it back in for future recursions
+        attributes.add(bestAttribute);
+
         return new ParentNode(bestAttributeName, left, right);
     }
 
