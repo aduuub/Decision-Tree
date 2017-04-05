@@ -1,0 +1,79 @@
+Reading data from file hepatitis-training.dat
+2 categories
+Read 110 patients
+Reading data from file hepatitis-test.dat
+2 categories
+Read 27 patients
+
+Baseline probability: 0.8
+Baseline attribute: live
+Tree: 
+
+ASCITES = True:
+  SPIDERS = True:
+    VARICES = True:
+      FIRMLIVER = True:
+        Category live, prob = 100%
+      FIRMLIVER = False:
+        BIGLIVER = True:
+          STEROID = True:
+            Category live, prob = 100%
+          STEROID = False:
+            FEMALE = True:
+              Category live, prob = 100%
+            FEMALE = False:
+              FATIGUE = True:
+                Category die, prob = 100%
+              FATIGUE = False:
+                ANTIVIRALS = True:
+                  Category live, prob = 100%
+                ANTIVIRALS = False:
+                  Category die, prob = 100%
+        BIGLIVER = False:
+          Category live, prob = 100%
+    VARICES = False:
+      Category die, prob = 100%
+  SPIDERS = False:
+    FIRMLIVER = True:
+      AGE = True:
+        Category live, prob = 100%
+      AGE = False:
+        SGOT = True:
+          Category live, prob = 100%
+        SGOT = False:
+          ANTIVIRALS = True:
+            Category die, prob = 100%
+          ANTIVIRALS = False:
+            HISTOLOGY = True:
+              Category die, prob = 100%
+            HISTOLOGY = False:
+              Category live, prob = 100%
+    FIRMLIVER = False:
+      SGOT = True:
+        BIGLIVER = True:
+          SPLEENPALPABLE = True:
+            Category live, prob = 100%
+          SPLEENPALPABLE = False:
+            ANOREXIA = True:
+              Category die, prob = 100%
+            ANOREXIA = False:
+              Category live, prob = 100%
+        BIGLIVER = False:
+          Category die, prob = 100%
+      SGOT = False:
+        Category live, prob = 100%
+ASCITES = False:
+  BIGLIVER = True:
+    STEROID = True:
+      Category die, prob = 100%
+    STEROID = False:
+      ANOREXIA = True:
+        Category die, prob = 100%
+      ANOREXIA = False:
+        Category live, prob = 100%
+  BIGLIVER = False:
+    Category live, prob = 100%
+
+Patients predicted to die: 6. Actually died: 4
+Patients predicted to live: 21. Actually lived: 23
+Percentage correct: 0.7777777777777778

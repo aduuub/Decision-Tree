@@ -28,9 +28,6 @@ public class Main {
     public Main(String trainingFileName, String testingFileName){
         // Parse in the data and build the tree using the training data
         headNode = initTree(trainingFileName, testingFileName);
-
-        //
-        runTests();
     }
 
 
@@ -62,8 +59,9 @@ public class Main {
 
     /**
      * Runs the tests on the test data
+     * @return - percentage correct from running the test data on the training data
      */
-    private void runTests(){
+    private double runTests(){
         // Print accuracy
         System.out.println("\nBaseline probability: " + treeBuilder.getBaseLineProbability());
         System.out.println("Baseline attribute: " + treeBuilder.getBaselineOutcome());
@@ -96,19 +94,54 @@ public class Main {
         System.out.println("Patients predicted to live: " + (testingData.size() - predictedToDie) + ". Actually lived: " +
                 (testingData.size() - actuallyDied));
         System.out.println("Percentage correct: " + percentage);
+        return percentage;
     }
 
 
     /**
-     *
+     * Run the program!
      * @param args
      */
     public static void main(String args[]){
-        if(args.length != 2){
-            System.out.println("Invalid program arguments. \n Arguments: \"TrainingFileName\" \"TestingFileName\"");
+        if(args.length == 0){
+            run10Tests();
+        }
+        else if(args.length != 2){
+            System.out.println("Invalid program arguments. \n Arguments: \"TrainingFileName\" \"TestingFileName\" \n" +
+                    "Otherwise run with no arguments to run all 10 tests");
 
         }else{
-            new Main(args[0], args[1]);
+            System.out.println("Running on specified files");
+            new Main(args[0], args[1]).runTests();
         }
+    }
+
+    /**
+     * Runs the 10 tests using hepatitis-test-run and hepatitis-training-run files
+     */
+    public static void run10Tests(){
+        System.out.println("Running 10 tests");
+
+        List<Double> percentage = new ArrayList<>();
+        for(int i=1; i <= 10; i++){
+            String num = (i < 10) ? "0"+i : String.valueOf(i);
+            String test = "hepatitis-test-run" + num + ".dat";
+            String train = "hepatitis-training-run" + num + ".dat";
+
+            Main main = new Main(train, test);
+            double perc = main.runTests();
+            System.out.println(perc);
+            percentage.add(perc);
+        }
+
+        double total = 0;
+        for(Double d : percentage){
+            total += d;
+            System.out.println(d*100);
+        }
+        System.out.println("Total " + total*100);
+
+        total /= percentage.size();
+        System.out.println("Total " + total);
     }
 }
